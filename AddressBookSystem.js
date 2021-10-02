@@ -1,6 +1,15 @@
 let prompt = require("prompt-sync")(); //module used to take user input from console
-let {validateFirstName,validateLastName,validateAddress,validateCity,validateState, validateZip, validateNumber,validateEmail} = require("./Validation.js")
-
+let {
+  validateFirstName,
+  validateLastName,
+  validateAddress,
+  validateCity,
+  validateState,
+  validateZip,
+  validateNumber,
+  validateEmail,
+} = require("./Validation.js");
+let { editContact } = require("./EditContact.js");
 let firstName = "";
 let lastName = "";
 let address = "";
@@ -33,16 +42,18 @@ addContact = () => {
     phone: phone,
     email: email,
   };
-  addressBook.push(contact)
+  addressBook.push(contact);
 };
 
-display = () =>{
-    console.log(addressBook);
-}
+display = () => {
+  console.log(addressBook);
+};
 
 let flag = true;
 while (flag) {
-  console.log("1.Add Contact\n2.Display AddressBook\nPress other keys to exit");
+  console.log(
+    "1.Add Contact\n2.Display AddressBook\n3.Edit contact\nPress other keys to exit"
+  );
   let choice = prompt("Enter your choice: ");
   switch (Number(choice)) {
     case 1:
@@ -50,6 +61,11 @@ while (flag) {
       break;
     case 2:
       display(); // displays the addressBook
+      break;
+    case 3:
+      let name = prompt("Enter the first name to edit: ");
+      editContact(name, addressBook);
+      console.log("Edited successfullly");
       break;
     default:
       flag = false;
