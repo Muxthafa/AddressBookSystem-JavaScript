@@ -11,9 +11,10 @@ let phone = "";
 let email = "";
 
 let contact; //to store contact object
+let addressBook = new Array(); //to store multiple contacts
 
-
-createContact = () => {
+//function adds details to the address book array
+addContact = () => {
   firstName = validateFirstName();
   lastName = validateLastName();
   address = validateAddress();
@@ -32,7 +33,26 @@ createContact = () => {
     phone: phone,
     email: email,
   };
-  console.log(contact);
+  addressBook.push(contact)
 };
 
-createContact();
+display = () =>{
+    console.log(addressBook);
+}
+
+let flag = true;
+while (flag) {
+  console.log("1.Add Contact\n2.Display AddressBook\nPress other keys to exit");
+  let choice = prompt("Enter your choice: ");
+  switch (Number(choice)) {
+    case 1:
+      addContact(); //to insert new contact details of a person
+      break;
+    case 2:
+      display(); // displays the addressBook
+      break;
+    default:
+      flag = false;
+      break;
+  }
+}
