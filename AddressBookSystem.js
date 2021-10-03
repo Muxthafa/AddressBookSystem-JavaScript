@@ -25,7 +25,8 @@ let addressBook = new Array(); //to store multiple contacts
 
 //function adds details to the address book array
 addContact = () => {
-  firstName = validateFirstName();
+  firstName = validateFirstName(addressBook);
+  if(firstName == "exists") return    // if the name exists then it will return
   lastName = validateLastName();
   address = validateAddress();
   city = validateCity();

@@ -10,11 +10,22 @@ validation = (regex, value) => {
     }
 };
 
-validateFirstName = () => {
+validateFirstName = (addressBook) => {
   firstName = prompt("Enter the first name: ");
-  return validation(/^[A-Z]{1}[a-z]{2,}$/, firstName)
+  const findDuplicate = addressBook.find((contact) => {   //if the contact exists then returns true
+    if(contact.firstName == firstName){
+          return true
+    }
+  })
+
+  if(findDuplicate){
+    console.log("Name already exists!!");
+    return "exists"
+  }else{
+    return validation(/^[A-Z]{1}[a-z]{2,}$/, firstName)
     ? firstName
     : validateFirstName();
+  }
 };
 
 validateLastName = () => {
