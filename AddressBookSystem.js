@@ -59,11 +59,18 @@ let deleteContact = (name) => {
   return deletedContact;
 };
 
+let countContacts = () => {
+  let total = addressBook.reduce((total,contact) => {     //reduce method uses callback to count total number of contacts in an array
+      return total+1
+  },0)        //total is set to 0 initially
+  console.log(total);
+}
+
 let flag = true;
 let name;
 while (flag) {
   console.log(
-    "1.Add Contact\n2.Display AddressBook\n3.Edit contact\n4.Delete Contact\nPress other keys to exit"
+    "1.Add Contact\n2.Display AddressBook\n3.Edit contact\n4.Delete Contact\n5.Total number of contacts in the address book\nPress other keys to exit"
   );
   let choice = prompt("Enter your choice: ");
   switch (Number(choice)) {
@@ -83,6 +90,9 @@ while (flag) {
       let contact = deleteContact(name); //delete the contact
       if (contact.length > 0) console.log("Delted Successfully!!");
       else console.log("Contact not found!!!");
+      break;
+    case 5:
+      countContacts()  //count total contacts
       break;
     default:
       flag = false;
