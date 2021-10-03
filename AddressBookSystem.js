@@ -10,6 +10,7 @@ let {
   validateEmail,
 } = require("./Validation.js");
 let { editContact } = require("./EditContact.js");
+
 let firstName = "";
 let lastName = "";
 let address = "";
@@ -49,10 +50,20 @@ display = () => {
   console.log(addressBook);
 };
 
+//method deletes the contact
+let deleteContact = (name) => {
+  let deletedContact = addressBook.splice(
+    addressBook.findIndex((contact) => contact.firstName == name),
+    1
+  );
+  return deletedContact;
+};
+
 let flag = true;
+let name;
 while (flag) {
   console.log(
-    "1.Add Contact\n2.Display AddressBook\n3.Edit contact\nPress other keys to exit"
+    "1.Add Contact\n2.Display AddressBook\n3.Edit contact\n4.Delete Contact\nPress other keys to exit"
   );
   let choice = prompt("Enter your choice: ");
   switch (Number(choice)) {
@@ -63,9 +74,15 @@ while (flag) {
       display(); // displays the addressBook
       break;
     case 3:
-      let name = prompt("Enter the first name to edit: ");
+      name = prompt("Enter the first name to edit: ");
       editContact(name, addressBook);
       console.log("Edited successfullly");
+      break;
+    case 4:
+      name = prompt("Enter the first name whose contact to be deleted: ");
+      let contact = deleteContact(name); //delete the contact
+      if (contact.length > 0) console.log("Delted Successfully!!");
+      else console.log("Contact not found!!!");
       break;
     default:
       flag = false;
