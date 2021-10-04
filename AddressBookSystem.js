@@ -69,16 +69,16 @@ let countContacts = () => {
 
 //method to search person contact in particular city or state
 let searchCityState = (name) => {
-  let tempArray = [...addressBook];
-  tempArray.filter(() =>{
-    addressBook.find((contact) =>{
-      if (contact.city == name || contact.state == name) {
-        return true;
-      }
-    });
-  });
-  console.log(tempArray);
+  let tempArray = addressBook.filter((contact) => contact.city == name || contact.state == name)
+  if (tempArray.length == 0) {
+    console.log("No contact found");
+  } else {
+    console.log("Total " + tempArray.length + " found");
+    console.log(tempArray);
+    console.log(addressBook);
+  }
 };
+
 
 let flag = true;
 let name;
@@ -109,7 +109,7 @@ while (flag) {
       countContacts()  //count total contacts
       break;
     case 6:
-      name = prompt("Enter city or state name");
+      name = prompt("Enter city or state name: ");
       searchCityState(name);
       break;
     default:
