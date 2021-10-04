@@ -75,16 +75,24 @@ let searchCityState = (name) => {
   } else {
     console.log("Total " + tempArray.length + " found");
     console.log(tempArray);
-    console.log(addressBook);
   }
 };
 
+//function to sort the array by first name
+let sortByName = () => {
+  addressBook.sort((a, b) => {
+    let name1 = a.firstName.toLowerCase()
+    let name2 = b.firstName.toLowerCase();
+    return (name1 > name2) ? 1 : -1
+  })
+  console.log(addressBook);
+}
 
 let flag = true;
 let name;
 while (flag) {
   console.log(
-    "1.Add Contact\n2.Display AddressBook\n3.Edit contact\n4.Delete Contact\n5.Total number of contacts in the address book\n6.Search person by city or state\nPress other keys to exit"
+    "1.Add Contact\n2.Display AddressBook\n3.Edit contact\n4.Delete Contact\n5.Total number of contacts in the address book\n6.Search person by city or state\n7.Sort the address book by name\nPress other keys to exit"
   );
   let choice = prompt("Enter your choice: ");
   switch (Number(choice)) {
@@ -111,6 +119,9 @@ while (flag) {
     case 6:
       name = prompt("Enter city or state name: ");
       searchCityState(name);
+      break;
+    case 7:
+      sortByName();  //sort the array
       break;
     default:
       flag = false;
