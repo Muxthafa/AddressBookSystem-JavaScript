@@ -9,7 +9,9 @@ let {
   validateNumber,
   validateEmail,
 } = require("./Validation.js");
+
 let { editContact } = require("./EditContact.js");
+let { sortEntries } = require("./sortContacts");
 
 let firstName = "";
 let lastName = "";
@@ -78,21 +80,11 @@ let searchCityState = (name) => {
   }
 };
 
-//function to sort the array by first name
-let sortByName = () => {
-  addressBook.sort((a, b) => {
-    let name1 = a.firstName.toLowerCase()
-    let name2 = b.firstName.toLowerCase();
-    return (name1 > name2) ? 1 : -1
-  })
-  console.log(addressBook);
-}
-
 let flag = true;
 let name;
 while (flag) {
   console.log(
-    "1.Add Contact\n2.Display AddressBook\n3.Edit contact\n4.Delete Contact\n5.Total number of contacts in the address book\n6.Search person by city or state\n7.Sort the address book by name\nPress other keys to exit"
+    "1.Add Contact\n2.Display AddressBook\n3.Edit contact\n4.Delete Contact\n5.Total number of contacts in the address book\n6.Search person by city or state\n7.Sort address book\nPress other keys to exit"
   );
   let choice = prompt("Enter your choice: ");
   switch (Number(choice)) {
@@ -121,7 +113,7 @@ while (flag) {
       searchCityState(name);
       break;
     case 7:
-      sortByName();  //sort the array
+      sortEntries(addressBook);  //sort the entries
       break;
     default:
       flag = false;
